@@ -1,8 +1,10 @@
 import { useForm } from "react-hook-form"
 import { useNavigate } from "react-router-dom"
+import { useUser } from "../../context/UserContext"
 
 function Login() {
   const { register, handleSubmit, formState: { errors } } = useForm()
+  const { setUser } = useUser()
   const navigate = useNavigate()
 
   const onSubmit = async ({ username }) => {
@@ -17,6 +19,7 @@ function Login() {
     }
 
     localStorage.setItem("user", JSON.stringify(userObject))
+    setUser(userObject)
     navigate("/translate")
   }
 
