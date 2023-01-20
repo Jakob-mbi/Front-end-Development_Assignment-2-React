@@ -1,3 +1,35 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+:root {
+    --YELLOW: #FFC75F;
+    --YELLOW-DARK: #E7B355;
+    --PURPLE: #845EC2;
+    --GRAY: #969696;
+    --GRAY-LIGTH: #EFEFEF;
+}
+
+.heading-font {
+    font-family: 'Love Ya Like A Sister', cursive;
+}
+
+.bg-yellow {
+    background-color: var(--YELLOW);
+}
+
+.bg-yellow-dark {
+    background-color: var(--YELLOW-DARK);
+}
+
+.bg-purple {
+    background-color: var(--PURPLE);
+}
+
+.bg-gray {
+    background-color: var(--GRAY);
+}
+
+.bg-gray {
+    background-color: var(--GRAY-LIGTH);
+}
