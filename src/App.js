@@ -8,7 +8,7 @@ import Navbar from './components/Navbar/Navbar';
 function App() {
   return (
     <BrowserRouter>
-      <div className="App">
+      <div className="bg-gray">
         <Navbar />
         <Routes>
           <Route path="/" element={<Login />} />
