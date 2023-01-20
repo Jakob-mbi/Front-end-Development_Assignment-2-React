@@ -10,6 +10,10 @@
     --GRAY-LIGTH: #EFEFEF;
 }
 
+body {
+    font-family: 'Sanchez', serif;
+}
+
 .heading-font {
     font-family: 'Love Ya Like A Sister', cursive;
 }
