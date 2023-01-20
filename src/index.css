@@ -1,8 +1,35 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+    --YELLOW: #FFC75F;
+    --YELLOW-DARK: #E7B355;
+    --PURPLE: #845EC2;
+    --GRAY: #969696;
+    --GRAY-LIGTH: #EFEFEF;
+}
+
+.heading-font {
+    font-family: 'Love Ya Like A Sister', cursive;
+}
+
+.bg-yellow {
+    background-color: var(--YELLOW);
+}
+
+.bg-yellow-dark {
+    background-color: var(--YELLOW-DARK);
+}
+
+.bg-purple {
+    background-color: var(--PURPLE);
+}
+
+.bg-gray {
+    background-color: var(--GRAY);
+}
+
+.bg-gray {
+    background-color: var(--GRAY-LIGTH);
 }
