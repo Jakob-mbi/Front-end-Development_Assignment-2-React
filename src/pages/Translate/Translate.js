@@ -1,6 +1,12 @@
+import Input from "./Input"
+import Output from "./Output"
+
 function Translate() {
   return (
-    <div>Translate</div>
+    <div className="">
+      <Input />
+      <Output />
+    </div>
   )
 }
 
