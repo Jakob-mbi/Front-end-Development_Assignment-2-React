@@ -63,13 +63,12 @@ function Login() {
           </svg>
           <img 
             src="/images/logo.png" 
-            alt="A happy robot" 
-            className="absolute top-1/2 left-1/2 w-40" 
-            style={{ transform: "translate(-50%, -50%)"}}/>
+            alt="A robot saying hello" 
+            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-40" />
         </div>
 
         <div className="pl-4">
-          <h1 className="text-5xl text-white pb-3">Lost in Translation</h1>
+          <h1 className="text-5xl text-white pb-3 heading-font">Lost in Translation</h1>
           <h2 className="text-3xl text-white">Get started</h2>
         </div>
       </header>
