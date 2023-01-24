@@ -1,6 +1,7 @@
 import { useEffect } from "react"
 import { useForm } from "react-hook-form"
 import { useNavigate } from "react-router-dom"
+import { fetchUser, registerUser } from "../../api/user"
 import { STORAGE_KEY_USER } from "../../const/storageKey"
 import { useUser } from "../../context/UserContext"
 import { storageWrite } from "../../shared/storage"
@@ -26,47 +27,7 @@ function Login() {
     storageWrite(STORAGE_KEY_USER, userObject)
     setUser(userObject)
   }
-
-  const fetchUser = async (username) => {
-    try {
-      const response = await fetch(`${process.env.REACT_APP_API_URL}?username=${username}`)
-      
-      if (!response.ok) {
-        throw Error("Failed to fetch user")
-      }
-
-      return await response.json()[0]
-
-    } catch (error) {
-      console.log(error)
-    }
-  }
-
-  const registerUser = async (username) => {
-    try {
-      const headers = {
-        'X-API-Key': process.env.REACT_APP_API_KEY,
-        'Content-Type': 'application/json'
-      }
-
-      const body = JSON.stringify({ 
-        username, 
-        translations: []
-      })
-
-      const response = await fetch(process.env.REACT_APP_API_URL, { method: 'POST', headers, body })
-      
-      if (!response.ok) {
-        throw Error("Failed to register user")
-      }
-
-      return await response.json()
-      
-    } catch (error) {
-      console.log(error)
-    }
-  }
-
+  
   return (
     <div className="h-screen pt-20 bg-gray">
 

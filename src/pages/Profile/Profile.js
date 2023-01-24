@@ -1,4 +1,6 @@
+import { useEffect } from "react"
 import { Link, useNavigate } from "react-router-dom"
+import { fetchUser } from "../../api/user"
 import { STORAGE_KEY_USER } from "../../const/storageKey"
 import { useUser } from "../../context/UserContext"
 import withAuth from "../../hoc/withAuth"
@@ -7,6 +9,19 @@ import { storageDelete } from "../../shared/storage"
 function Profile() {
   const navigate = useNavigate()
   const { user, setUser } = useUser()
+
+  useEffect(() => {
+    
+    console.log(user)
+
+    const reFetchUser = async () => {
+      const userObject = await fetchUser(user.username)
+      setUser(userObject)
+    } 
+
+    reFetchUser()
+    // eslint-disable-next-line
+  }, [])
 
   const logout = () => {
     storageDelete(STORAGE_KEY_USER)
