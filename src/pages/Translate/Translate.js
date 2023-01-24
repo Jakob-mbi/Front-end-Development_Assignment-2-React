@@ -1,3 +1,4 @@
+import withAuth from "../../hoc/withAuth"
 import Input from "./Input"
 import Output from "./Output"
 
@@ -10,4 +11,4 @@ function Translate() {
   )
 }
 
-export default Translate
+export default withAuth(Translate)

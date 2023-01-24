@@ -1,5 +1,6 @@
 import { Link, useNavigate } from "react-router-dom"
 import { useUser } from "../../context/UserContext"
+import withAuth from "../../hoc/withAuth"
 
 function Profile() {
   const navigate = useNavigate()
@@ -74,4 +75,4 @@ function Profile() {
   )
 }
 
-export default Profile
+export default withAuth(Profile)

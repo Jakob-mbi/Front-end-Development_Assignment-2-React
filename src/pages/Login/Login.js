@@ -1,33 +1,42 @@
+import { useEffect } from "react"
 import { useForm } from "react-hook-form"
 import { useNavigate } from "react-router-dom"
+import { STORAGE_KEY_USER } from "../../const/storageKey"
 import { useUser } from "../../context/UserContext"
+import { storageWrite } from "../../shared/storage"
 
 function Login() {
   const { register, handleSubmit, formState: { errors } } = useForm()
-  const { setUser } = useUser()
+  const { user, setUser } = useUser()
   const navigate = useNavigate()
 
-  const onSubmit = async ({ username }) => {
-    const fetchedUser = await fetchUser(username)
-    let userObject = fetchedUser[0]
+  useEffect(() => {
+    if (user !== null) {
+      navigate("/profile")
+    }
+  }, [user, navigate])
 
+  const onSubmit = async ({ username }) => {
+    let userObject = await fetchUser(username)
 
     if (!userObject) { 
-      const newUser = await registerUser(username)
-      userObject = newUser
-      console.log(newUser)
+      userObject = await registerUser(username)
     }
 
-    localStorage.setItem("user", JSON.stringify(userObject))
+    storageWrite(STORAGE_KEY_USER, userObject)
     setUser(userObject)
-    navigate("/translate")
   }
 
   const fetchUser = async (username) => {
     try {
       const response = await fetch(`${process.env.REACT_APP_API_URL}?username=${username}`)
-      const data = await response.json()
-      return data
+      
+      if (!response.ok) {
+        throw Error("Failed to fetch user")
+      }
+
+      return await response.json()[0]
+
     } catch (error) {
       console.log(error)
     }
@@ -46,8 +55,13 @@ function Login() {
       })
 
       const response = await fetch(process.env.REACT_APP_API_URL, { method: 'POST', headers, body })
-      const data = await response.json()
-      return data
+      
+      if (!response.ok) {
+        throw Error("Failed to register user")
+      }
+
+      return await response.json()
+      
     } catch (error) {
       console.log(error)
     }
