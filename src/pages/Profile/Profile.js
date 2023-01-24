@@ -1,13 +1,15 @@
 import { Link, useNavigate } from "react-router-dom"
+import { STORAGE_KEY_USER } from "../../const/storageKey"
 import { useUser } from "../../context/UserContext"
 import withAuth from "../../hoc/withAuth"
+import { storageDelete } from "../../shared/storage"
 
 function Profile() {
   const navigate = useNavigate()
   const { user, setUser } = useUser()
 
   const logout = () => {
-    localStorage.removeItem("user")
+    storageDelete(STORAGE_KEY_USER)
     setUser(null)
     navigate("/")
   }
