@@ -1,5 +1,6 @@
 import { useEffect } from "react"
 import { Link, useNavigate } from "react-router-dom"
+import { toast } from "react-toastify"
 import { fetchUser, updateUser } from "../../api/user"
 import { STORAGE_KEY_USER } from "../../const/storageKey"
 import { useUser } from "../../context/UserContext"
@@ -35,11 +36,14 @@ function Profile() {
     const [error, userObject] = await updateUser(user.id, { translations: [] })
     
     if (error !== null) {
+      toast.error("An error occurred...")
       throw new Error(error)
     }
 
     setUser(userObject)
   }
+
+  console.log(user)
 
   return (
     <div className="h-screen pt-20 bg-gray">

@@ -1,6 +1,7 @@
 import { useEffect } from "react"
 import { useForm } from "react-hook-form"
 import { useNavigate } from "react-router-dom"
+import { toast } from "react-toastify"
 import { fetchUser, registerUser } from "../../api/user"
 import { STORAGE_KEY_USER } from "../../const/storageKey"
 import { useUser } from "../../context/UserContext"
@@ -22,20 +23,48 @@ function Login() {
       throw new Error("loginUser: Invalid username provided")
     }
 
+    // Nofity user of login/registration process
+    const loginToast = toast.loading("Please wait...")
+
     let [error, userObject] = await fetchUser(username)
 
+    // Notify user and throw error
     if (error !== null) {
+      toast.update(loginToast, {
+        render: "Error occured during login",
+        type: "error",
+        isLoading: false
+      })
+
       throw new Error(error)
     }
 
     // If no user was found, create a new user instead 
     if (!userObject) { 
-      userObject = await registerUser(username)
+      [error, userObject] = await registerUser(username)
+    }
+
+    // Notify user and throw error
+    if (error !== null) {
+      toast.update(loginToast, {
+        render: "Error occured during registration",
+        type: "error",
+        isLoading: false
+      })
+
+      throw new Error(error)
     }
 
     // Add user to sessionStorage and context
     storageWrite(STORAGE_KEY_USER, userObject)
     setUser(userObject)
+
+    // Notify user of successful login
+    toast.update(loginToast, {
+      render: "Successful login!",
+      type: "success",
+      isLoading: false
+    })
   }
 
   return (

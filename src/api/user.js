@@ -16,7 +16,7 @@ export const fetchUser = async (username) => {
     return [null, data[0]]
 
   } catch (error) {
-    return [error, {}]
+    return [error.message, {}]
   }
 }
 
@@ -48,7 +48,7 @@ export const registerUser = async (username) => {
     return [null, data]
       
   } catch (error) {
-    return [error, {}]
+    return [error.message, {}]
   }
 }
 
@@ -80,6 +80,6 @@ export const updateUser = async (userId, body) => {
       return [null, data]
 
   } catch (error) {
-    return [error, data]
+    return [error.message, {}]
   }
 }
