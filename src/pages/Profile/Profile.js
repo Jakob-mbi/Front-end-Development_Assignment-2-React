@@ -43,8 +43,6 @@ function Profile() {
     setUser(userObject)
   }
 
-  console.log(user)
-
   return (
     <div className="h-screen pt-20 bg-gray">
       <div className="h-4/5 flex flex-col items-center bg-yellow px-40 py-12">
