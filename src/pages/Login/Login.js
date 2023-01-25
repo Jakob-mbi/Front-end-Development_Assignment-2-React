@@ -17,17 +17,27 @@ function Login() {
     }
   }, [user, navigate])
 
-  const onSubmit = async ({ username }) => {
-    let userObject = await fetchUser(username)
+  const loginUser = async ({ username }) => {
+    if (!username || typeof username !== "string") {
+      throw new Error("loginUser: Invalid username provided")
+    }
 
+    let [error, userObject] = await fetchUser(username)
+
+    if (error !== null) {
+      throw new Error(error)
+    }
+
+    // If no user was found, create a new user instead 
     if (!userObject) { 
       userObject = await registerUser(username)
     }
 
+    // Add user to sessionStorage and context
     storageWrite(STORAGE_KEY_USER, userObject)
     setUser(userObject)
   }
-  
+
   return (
     <div className="h-screen pt-20 bg-gray">
 
@@ -48,7 +58,7 @@ function Login() {
         </div>
       </header>
 
-      <form onSubmit={handleSubmit(onSubmit)} className="w-2/3 mx-auto py-4 px-4 border-4 bg-white rounded-full -translate-y-1/2" style={{ borderColor: "var(--PURPLE)"}}>
+      <form onSubmit={handleSubmit(loginUser)} className="w-2/3 mx-auto py-4 px-4 border-4 bg-white rounded-full -translate-y-1/2" style={{ borderColor: "var(--PURPLE)"}}>
         <label htmlFor="username" className="w-full flex items-center text-2xl">
           <input {...register("username", { required: true })} placeholder="What's your name?" className="w-full p-2" />
           <button type="submit" className="bg-purple text-white p-2 rounded-full">Go!</button>

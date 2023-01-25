@@ -1,6 +1,6 @@
 import { useEffect } from "react"
 import { Link, useNavigate } from "react-router-dom"
-import { fetchUser } from "../../api/user"
+import { fetchUser, updateUser } from "../../api/user"
 import { STORAGE_KEY_USER } from "../../const/storageKey"
 import { useUser } from "../../context/UserContext"
 import withAuth from "../../hoc/withAuth"
@@ -11,11 +11,13 @@ function Profile() {
   const { user, setUser } = useUser()
 
   useEffect(() => {
-    
-    console.log(user)
-
     const reFetchUser = async () => {
-      const userObject = await fetchUser(user.username)
+      const [error, userObject] = await fetchUser(user.username)
+      
+      if (error !== null) {
+        throw new Error(error)
+      }
+
       setUser(userObject)
     } 
 
@@ -30,30 +32,13 @@ function Profile() {
   }
 
   const clearTranslations = async () => {
-    try {
-      const headers = {
-        'X-API-Key': process.env.REACT_APP_API_KEY,
-        'Content-Type': 'application/json'
-      }
-
-      const body = JSON.stringify({
-        translations: []
-      })
-
-      const response = await fetch(`${process.env.REACT_APP_API_URL}/${user.id}`, {
-        method: 'PATCH', 
-        headers, 
-        body 
-      })
-
-      const data = await response.json()
-      console.log(data)
-
-      setUser(data)
-
-    } catch (error) {
-      console.error(error)
+    const [error, userObject] = await updateUser(user.id, { translations: [] })
+    
+    if (error !== null) {
+      throw new Error(error)
     }
+
+    setUser(userObject)
   }
 
   return (
