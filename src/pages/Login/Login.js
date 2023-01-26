@@ -33,7 +33,8 @@ function Login() {
       toast.update(loginToast, {
         render: "Error occured during login",
         type: "error",
-        isLoading: false
+        isLoading: false,
+        autoClose: 4000
       })
 
       throw new Error(error)
@@ -49,7 +50,8 @@ function Login() {
       toast.update(loginToast, {
         render: "Error occured during registration",
         type: "error",
-        isLoading: false
+        isLoading: false,
+        autoClose: 4000
       })
 
       throw new Error(error)
@@ -63,7 +65,8 @@ function Login() {
     toast.update(loginToast, {
       render: "Successful login!",
       type: "success",
-      isLoading: false
+      isLoading: false,
+      autoClose: 2500
     })
   }
 
