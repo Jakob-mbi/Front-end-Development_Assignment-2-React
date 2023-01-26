@@ -63,7 +63,7 @@ function Profile() {
       </div>
       {user.translations.length ? (
         <ul className="list-disc w-1/2 px-8 py-4 rounded-lg -translate-y-2 bg-yellow-dark">
-          {user.translations.map((translation, index) => (
+          {user.translations.slice(-10).map((translation, index) => (
             <li key={index}>{translation}</li>
           ))}
         </ul>
