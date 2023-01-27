@@ -4,7 +4,7 @@ A simple website that translates words and phrases into american sign language. 
 
 ## Installation
 
-To get the site working locally on your machine. You'll need to [download the ZIP](https://github.com/Jakob-mbi/Front-end-Development_Assignment-2-React/archive/refs/heads/main.zip) or clone the repository (recommended) using the following command:
+To get the site working locally on your machine. You'll need to either [download the ZIP](https://github.com/Jakob-mbi/Front-end-Development_Assignment-2-React/archive/refs/heads/main.zip) or clone the repository using the following command:
 ```
 git clone https://github.com/Jakob-mbi/Front-end-Development_Assignment-2-React.git
 ```
